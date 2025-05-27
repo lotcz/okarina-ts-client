@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"target": "es5",
+		"module": "ESNext",
+		"lib": [
+			"es2017",
+			"dom"
+		],
+    "allowJs": true,
+    "resolveJsonModule": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"declaration": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": [
+		"src",
+		"*.tsx",
+		"*.ts"
+	],
+	"exclude": [
+		"node_modules/**",
+		"dist",
+		"docker-compose.yml",
+		".env-example"
+	]
+}
