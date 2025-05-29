@@ -41,7 +41,7 @@ class OcrNavigateFolder extends OcrNavigateEntity {
 	}
 }
 
-export default class OkarinaNavigation {
+export class OkarinaNavigation {
 	templates = new OcrNavigateEntity('templates');
 	documents = new OcrNavigateDocument();
 	folders = new OcrNavigateFolder();
