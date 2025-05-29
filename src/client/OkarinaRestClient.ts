@@ -3,6 +3,7 @@ import {ClientStats, OkarinaStats, Language} from "../type";
 import {DocumentTemplatesClient} from "./DocumentTemplatesClient";
 import {DocumentsClient} from "./DocumentsClient";
 import {FoldersClient} from "./FoldersClient";
+import {OAuthIdTokenProvider} from "zavadil-ts-common/dist/oauth/tokenprovider/OAuthIdTokenProvider";
 
 export class OkarinaRestClient extends RestClientWithOAuth {
 
@@ -14,8 +15,8 @@ export class OkarinaRestClient extends RestClientWithOAuth {
 
 	documents: DocumentsClient;
 
-	constructor(serverUrl: string) {
-		super(serverUrl);
+	constructor(serverUrl: string, freshIdTokenProvider?: OAuthIdTokenProvider, defaultPrivilege: string = '*') {
+		super(serverUrl, freshIdTokenProvider, defaultPrivilege);
 		this.languages = new LookupClient<Language>(this, 'admin/enumerations/languages');
 		this.folders = new FoldersClient(this);
 		this.documentTemplates = new DocumentTemplatesClient(this);
