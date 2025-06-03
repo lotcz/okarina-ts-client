@@ -22,6 +22,10 @@ export class FoldersClient extends EntityCachedClient<FolderStub> {
 		return this.client.getJson(`${this.name}/${folderId}/documents`, RestClient.pagingRequestToQueryParams(pr));
 	}
 
+	loadFolderDocumentsByState(state: string, folderId: number, pr?: PagingRequest): Promise<Page<DocumentStubWithPages>> {
+		return this.client.getJson(`${this.name}/${folderId}/documents/by-state/${state}`, RestClient.pagingRequestToQueryParams(pr));
+	}
+
 	save(fc: FolderStub): Promise<FolderStub> {
 		return super.save(fc).then(
 			(saved) => {

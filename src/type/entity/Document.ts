@@ -17,6 +17,7 @@ export type PageBase = EntityBase & {
 	state: string;
 	stateMessage?: string | null;
 	pageNumber: number;
+	fullText?: string | null;
 }
 
 export type PageStub = PageBase & {

@@ -1,10 +1,14 @@
 import {LookupClient, RestClient} from "zavadil-ts-common";
-import {FolderChain, DocumentTemplateStubWithPages, PageTemplateStubWithFragments} from "../type";
+import {FolderChain, DocumentTemplateStubWithPages, PageTemplateStubWithFragments, DocumentBase, DocumentStub} from "../type";
+import {FoldersClient} from "./FoldersClient";
 
 export class DocumentTemplatesClient extends LookupClient<DocumentTemplateStubWithPages> {
 
-	constructor(client: RestClient) {
+	private folders: FoldersClient;
+
+	constructor(client: RestClient, folders: FoldersClient) {
 		super(client, 'admin/document-templates');
+		this.folders = folders;
 	}
 
 	loadPageTemplate(pageTemplateId: number): Promise<PageTemplateStubWithFragments | undefined> {
@@ -32,6 +36,14 @@ export class DocumentTemplatesClient extends LookupClient<DocumentTemplateStubWi
 			return this.loadDocumentTemplateForFolder(folder.parent);
 		}
 		return Promise.resolve(null);
+	}
+
+	loadDocumentTemplateForDocument(document: DocumentStub): Promise<DocumentTemplateStubWithPages | null> {
+		if (document.documentTemplateId) {
+			return this.loadSingle(document.documentTemplateId);
+		}
+		return this.folders.loadFolderChain(document.folderId)
+			.then((chain) => this.loadDocumentTemplateForFolder(chain));
 	}
 
 	private uploadDocumentTemplatePreviewInternal(documentTemplateId: number, f: File): Promise<DocumentTemplateStubWithPages> {

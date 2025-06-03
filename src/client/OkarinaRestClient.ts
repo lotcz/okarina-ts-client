@@ -19,7 +19,7 @@ export class OkarinaRestClient extends RestClientWithOAuth {
 		super(serverUrl, freshIdTokenProvider, defaultPrivilege);
 		this.languages = new LookupClient<Language>(this, 'admin/enumerations/languages');
 		this.folders = new FoldersClient(this);
-		this.documentTemplates = new DocumentTemplatesClient(this);
+		this.documentTemplates = new DocumentTemplatesClient(this, this.folders);
 		this.documents = new DocumentsClient(this);
 	}
 

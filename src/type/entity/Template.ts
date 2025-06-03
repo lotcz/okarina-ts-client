@@ -17,6 +17,7 @@ export type DocumentTemplateStub = DocumentTemplateBase & {
 export type PageTemplateBase = EntityBase & {
 	previewImg?: string | null;
 	pageNumber: number;
+	scanFullText: boolean;
 }
 
 export type PageTemplateStub = PageTemplateBase & {
