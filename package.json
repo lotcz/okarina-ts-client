@@ -1,6 +1,6 @@
 {
 	"name": "okarina-ts-client",
-	"version": "1.0.9",
+	"version": "1.0.13",
 	"description": "Okarina client for Typescript.",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",

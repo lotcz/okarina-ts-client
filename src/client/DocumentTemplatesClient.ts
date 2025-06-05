@@ -61,4 +61,23 @@ export class DocumentTemplatesClient extends LookupClient<DocumentTemplateStubWi
 			});
 	}
 
+	/**
+	 * Will process page inheritFromTemplateId and return document template with actual page templates. Do not save this!
+	 */
+	async hydrateDocumentTemplate(documentTemplate: DocumentTemplateStubWithPages): Promise<DocumentTemplateStubWithPages> {
+		const cloned = {...documentTemplate};
+		cloned.pages = [];
+
+		for (const page of documentTemplate.pages) {
+				const actualPage = await this.loadFinalPageTemplate(page);
+				if (actualPage) {
+					const hydratedPage = {...actualPage};
+					hydratedPage.pageNumber = page.pageNumber;
+					cloned.pages.push(hydratedPage);
+				}
+		}
+
+		return cloned;
+	}
+
 }

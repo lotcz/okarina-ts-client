@@ -1,4 +1,4 @@
-import {EntityBase} from "zavadil-ts-common";
+import {EntityBase, EntityWithName} from "zavadil-ts-common";
 
 export type DocumentBase = EntityBase & {
 	imagePath: string;
@@ -25,7 +25,7 @@ export type PageStub = PageBase & {
 	pageTemplateId: number;
 }
 
-export type FragmentBase = EntityBase & {
+export type FragmentBase = EntityWithName & {
 	imagePath: string;
 	text?: string;
 }
