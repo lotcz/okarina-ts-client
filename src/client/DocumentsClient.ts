@@ -1,4 +1,4 @@
-import {EntityClient, PagingRequest, RestClient} from "zavadil-ts-common";
+import {EntityClient, Page, PagingRequest, RestClient} from "zavadil-ts-common";
 import {DocumentStubWithPages} from "../type";
 
 export class DocumentsClient extends EntityClient<DocumentStubWithPages> {
@@ -21,8 +21,12 @@ export class DocumentsClient extends EntityClient<DocumentStubWithPages> {
 		return this.client.postFormJson(`${this.name}/upload-image/${folderId}`, formData);
 	}
 
-	loadByState(state: string, pr?: PagingRequest): Promise<DocumentStubWithPages> {
+	loadByState(state: string, pr?: PagingRequest): Promise<Page<DocumentStubWithPages>> {
 		return this.client.getJson(`${this.name}/by-state/${state}`, RestClient.pagingRequestToQueryParams(pr));
+	}
+
+	updateDocumentState(id: number, s: string): Promise<void> {
+		return this.client.put(`${this.name}/${id}/state/${s}`).then();
 	}
 
 }
